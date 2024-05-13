@@ -86,7 +86,7 @@
     function loop() {
       requestAnimationFrame(loop);
 
-      if (++count <15) {
+      if (++count <21) {
         return;
       }
 
@@ -170,6 +170,42 @@
       }
     });
 
+    var touchStartX = 0;
+    var touchStartY = 0;
+
+    window.addEventListener('touchstart', function(e) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    });
+
+    window.addEventListener('touchmove', function(e) {
+        var touchEndX = e.touches[0].clientX;
+        var touchEndY = e.touches[0].clientY;
+
+        var dx = touchEndX - touchStartX;
+        var dy = touchEndY - touchStartY;
+
+        if (Math.abs(dx) > Math.abs(dy)) {
+            // horizontal swipe
+            if (dx > 0 && snake.dx === 0) {
+                snake.dx = grid;
+                snake.dy = 0;
+            } else if (dx < 0 && snake.dx === 0) {
+                snake.dx = -grid;
+                snake.dy = 0;
+            }
+        } else {
+            // vertical swipe
+            if (dy > 0 && snake.dy === 0) {
+                snake.dy = grid;
+                snake.dx = 0;
+            } else if (dy < 0 && snake.dy === 0) {
+                snake.dy = -grid;
+                snake.dx = 0;
+            }
+        }
+    });
+    
     snakeImg.onload();
     appleImg.onload();
   </script>
