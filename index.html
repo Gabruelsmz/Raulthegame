@@ -42,7 +42,7 @@
 </head>
 
 <body>
-  <canvas width="400" height="400" id="game"></canvas>
+  <canvas width="800" height="800" id="game"></canvas>
   <div id="score"></div>
   <div id="maxScore"></div>
   <script>
@@ -74,6 +74,12 @@
 
     var appleImg = new Image();
     appleImg.src = 'terra.jpg';
+
+    snakeImg.onload = appleImg.onload = function () {
+      requestAnimationFrame(loop);
+    };
+
+    grid = 32;
 
     snakeImg.onload = appleImg.onload = function () {
       requestAnimationFrame(loop);
